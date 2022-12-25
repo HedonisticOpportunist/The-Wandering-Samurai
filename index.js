@@ -19,14 +19,13 @@ require("./routes/main")(app);
 
 // the views folder 
 app.set("views", __dirname + "/views");
-const userRoutes = require('./routes/user');
 
-//set the app to use ejs for rendering
+// set the app to use ejs for rendering
 app.set("view engine", "ejs");
 app.engine("html", require("ejs").renderFile);
 
-//this adds all the userRoutes to the app under the path /user
-app.use('/user', userRoutes);
+// enables the ejs files to access the stylesheet 
+app.use(express.static("public"));
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

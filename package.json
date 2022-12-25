@@ -9,7 +9,7 @@
     "clean-db": "rm database.db #remove the old database",
     "start": "node index.js"
   },
-  "author": "Simon Katan",
+  "author": "Anita Pal",
   "license": "ISC",
   "dependencies": {
     "ejs": "^3.1.8",

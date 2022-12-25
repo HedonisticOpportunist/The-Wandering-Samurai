@@ -34,4 +34,5 @@ module.exports = function (app)
 	{
 		res.render("load-article.ejs."); 
 	});
+	
 }
