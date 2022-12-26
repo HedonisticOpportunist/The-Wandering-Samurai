@@ -20,9 +20,15 @@ require("./routes/main")(app);
 // the views folder 
 app.set("views", __dirname + "/views");
 
+// set up the routes for the articles
+// const articleRoutes = require('./routes/article');
+
 // set the app to use ejs for rendering
 app.set("view engine", "ejs");
 app.engine("html", require("ejs").renderFile);
+
+//this adds all the userRoutes to the app under the path /user
+// app.use('/article', articleRoutes);
 
 // enables the ejs files to access the stylesheet 
 app.use(express.static("public"));
