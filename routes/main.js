@@ -4,9 +4,9 @@ module.exports = function (app)
 	/** AUTHOR */
 	
     // Author - Home Page:
-    app.get("/author-homepage", function (req, res) 
+    app.get("/author", function (req, res) 
 	{
-        res.render("author-homepage.ejs");
+        res.render("author.ejs");
     });
 	
 	// Author - Settings Page:
@@ -16,23 +16,22 @@ module.exports = function (app)
 	});
 	
 	// Author - Edit Article Page:
-    app.get("/reader/edit-article", function (req, res) 
+    app.get("/edit", function (req, res) 
 	{
-        res.render("edit-article.ejs");
+        res.render("edit.ejs");
     });
 	
 	/** READER */
 	
 	// Reader - Home Page:
-	app.get("/", function (req, res)
+	app.get("/", (req, res) => 
 	{
 		res.render("index.ejs");
-	}); 
-	
-	// Reader - Article Page: 
-	app.get("/load-article", function (req, res)
-	{
-		res.render("load-article.ejs."); 
 	});
-	
+
+	// Reader - Article Page: 
+	app.get("/read", function (req, res)
+	{
+		res.render("read.ejs."); 
+	});
 }
