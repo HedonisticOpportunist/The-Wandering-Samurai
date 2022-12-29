@@ -1,37 +1,33 @@
-// The main.js file of your application
+/**
+ * The following routes are used to display the reader-related pages 
+ **/
+
 module.exports = function (app) 
 {
-	/** AUTHOR */
-	
-    // Author - Home Page:
-    app.get("/author", function (req, res) 
-	{
-        res.render("author.ejs");
-    });
-	
-	// Author - Settings Page:
-	app.get("/settings", function (req, res)
-	{
-		res.render("settings.ejs");
-	});
-	
-	// Author - Edit Article Page:
-    app.get("/edit", function (req, res) 
-	{
-        res.render("edit.ejs");
-    });
-	
-	/** READER */
-	
-	// Reader - Home Page:
-	app.get("/", (req, res) => 
-	{
-		res.render("index.ejs");
-	});
 
-	// Reader - Article Page: 
-	app.get("/read", function (req, res)
+ /**
+ * @desc 
+ * Retrieves the current published articles ordered by publication date
+ **/
+	app.get("/", (req, res, next) => 
 	{
-		res.render("read.ejs."); 
+		const sql = "SELECT * FROM articles_db ORDER BY date_published DESC";
+		global.db.all(sql, function (err, rows) 
+		{
+			if (err)
+			{
+				next(err); //send the error on to the error handler
+			} 
+			else 
+			{
+				// render the homepage with the data retrieved from the query 
+				res.render("index.ejs", {articles: rows}); 
+			}
+		});
+	});
+	
+	app.get("/read", (req, res, next) => 
+	{
+		res.render("read.ejs");
 	});
 }

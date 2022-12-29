@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="style.css">
 <head>
-    <title>Reader - Home Page:</title>
+    <title>Index:</title>
 </head>
 <body>
   <center>
@@ -14,10 +14,12 @@
     <h1>The Wandering Samurai</h1>
 	<h2>Musings of a Lost Soul </h2>
 	<h3>By Hirosaki Miroshimo </h3>
-	<h1>Published Articles</h1>
-	<p> Here you can find an assortment of articles decidated to my travels. </p>
-	 <ul>
-	</ul>
   </center>
+  <h1> List of Published Articles </h1>
+  <ul>
+	<% articles.forEach(function(article){ %>
+	<li><a href="/read=?<%= article.article_id %>"><%= article.title %>, <%= article.date_published %></a></li>
+	<% }) %>
+ </ul>
 </body>
 </html>   
