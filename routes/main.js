@@ -1,52 +1,138 @@
-/**
- * The following routes are used to display the reader-related pages 
- **/
 module.exports = function (app) 
 {
-
+	///// READER ROUTES /////
+	
 	/**
-	* @desc 
-	* Retrieves the current published articles ordered by publication date
+	* The following routes retrieves:  
+	* a) title, subtile and author of the blog 
+	* b) the currently published articles ordered by publication date 
 	**/
-	app.get("/", (req, res, next) => 
+	
+	app.get('/', runAsyncWrapper(async(req, res) => 
 	{
-		let query = "SELECT * FROM articles_db WHERE status = 'Published' ORDER BY date_published DESC";
+		// retrieve the blog-related details stored in the database 
+		const blogDetailsQuery = "SELECT * FROM blog_settings_db";
+		let detailRows = await queryDatabase(blogDetailsQuery);
 		
-		global.db.all(query, function (err, rows) // hanlde the query 
-		{
-			if (err)
-			{
-				next(err); //send the error on to the error handler
-			} 
-			else 
-			{
-				// render the homepage with the data retrieved from the query 
-				res.render("homepage.ejs", {articles: rows}); 
-			}
-		});
-	});
+		// retrieve the currently published articles stored in the database 
+		const articleQuery = "SELECT * FROM articles_db WHERE status = 'Published' ORDER BY date_published DESC";
+		let articleRows = await queryDatabase(articleQuery);
+		
+		// render the reader home page with tbe blog details and articles 
+		res.render("homepage.ejs", {details: detailRows, articles : articleRows});
+	}))
 	
-/**
- * Retrieves an article based on its by id
- **/
-	
-	app.get("/read/:id", (req, res, next) => 
+	/**
+	* Retrieves an article based on its id
+	**/
+	app.get("/read/:id", runAsyncWrapper(async(req, res) => 
 	{
+		// retrieve the blog-related details stored in the database 
+		const blogDetailsQuery = "SELECT * FROM blog_settings_db";
+		let detailRows = await queryDatabase(blogDetailsQuery);
+		
 		let id = req.params.id; // Get the required id 
-		let query = `SELECT * FROM articles_db WHERE article_id= ${id}`; 
 		
-		global.db.all(query, function (err, rows) // hanlde the query 
-		{
-			if (err)
-			{
-				next(err); //send the error on to the error handler
-			} 
-			else 
-			{
-				// render the reader's article page with the data retrieved from the query 
-				res.render("read.ejs", {articles: rows});
-			}
-		});
-	});
+		// retrieve any article that matches that selected id 
+		let idQuery = `SELECT * FROM articles_db WHERE article_id= ${id}`; 
+		let selectedRows = await queryDatabase(idQuery);
+		
+		 
+		// render the reader's article page with the blog details as well 
+		// as the data retrieved from the query 
+		res.render("read.ejs", {details: detailRows, articles: selectedRows});
+	}))	
 	
+	///// AUTHOR ROUTES /////
+	
+	/**
+	* The following route retrieves:  
+	* a) title, subtile and author of the blog 
+	* b) the currently published articles ordered by publication date 
+	**/
+	app.get('/author-homepage', runAsyncWrapper(async(req, res) => 
+	{
+		// retrieve the blog-related details stored in the database 
+		const blogDetailsQuery = "SELECT * FROM blog_settings_db";
+		let detailRows = await queryDatabase(blogDetailsQuery);
+		
+		// retrieve the currently published articles stored in the database 
+		const articleQuery = "SELECT * FROM articles_db WHERE status = 'Published' ORDER BY date_published DESC";
+		let articleRows = await queryDatabase(articleQuery);
+		
+		// render the reader home page with tbe blog details and articles 
+		res.render("author-homepage.ejs", {details: detailRows, articles : articleRows});
+	}))
+	
+	/**
+	* The following route retrieves: title, subtile and author of the blog 
+	* these are populated in the ejs template of the route 
+	**/
+	app.get('/settings', runAsyncWrapper(async(req, res) => 
+	{
+		// retrieve the blog-related details stored in the database 
+		const blogDetailsQuery = "SELECT * FROM blog_settings_db";
+		let detailRows = await queryDatabase(blogDetailsQuery);
+		
+		// render the reader home page with tbe blog details and articles 
+		res.render("settings.ejs", {details: detailRows});
+	}))
+	
+	/**
+	* Retrieves an article to be edited based on its id
+	**/
+	app.get("/edit/:id", runAsyncWrapper(async(req, res) => 
+	{
+		// retrieve the blog-related details stored in the database 
+		const blogDetailsQuery = "SELECT * FROM blog_settings_db";
+		let detailRows = await queryDatabase(blogDetailsQuery);
+		
+		let id = req.params.id; // Get the required id 
+		
+		// retrieve any article that matches that selected id 
+		let idQuery = `SELECT * FROM articles_db WHERE article_id= ${id}`; 
+		let selectedRows = await queryDatabase(idQuery);
+		
+		 
+		// render the reader's article page with the blog details as well 
+		// as the data retrieved from the query 
+		res.render("edit.ejs", {details: detailRows, articles: selectedRows});
+	}))	
+	
+	///// HELPER FUNCTIONS /////
+	
+	/**
+	* A function that handles queries and waits for them
+	* to be resolved 
+	* @Credit https://stackoverflow.com/questions/64372255/how-to-use-async-await-in-sqlite3-db-get-and-db-all
+	**/
+	async function queryDatabase(query)
+	{
+		return new Promise(function(resolve, reject)
+		{
+			db.all(query, function(err,rows)
+			{
+				if(err)
+				{
+					return reject(err);
+				}
+				
+				resolve(rows);
+			});
+		});
+	}
+	
+	/**
+	* A wrapper function for a handler that uses async
+	* @Credit: https://zellwk.com/blog/async-await-express/
+	**/
+	function runAsyncWrapper (callback) 
+	{
+		return function (req, res, next) 
+		{
+			callback(req, res, next)
+			.catch(next)
+		}
+	}
 }
+	

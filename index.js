@@ -20,17 +20,11 @@ require("./routes/main")(app);
 // the views folder 
 app.set("views", __dirname + "/views");
 
-// set up the routes
-const authorRoutes = require('./routes/author');
-
 // set the app to use ejs for rendering
 app.set("view engine", "ejs");
 app.engine("html", require("ejs").renderFile);
 
-//this adds all the routes to the app under the path 
-app.use('/author', authorRoutes);
-
-// enables the ejs files to access the stylesheet 
+// enables the app to use the public directory 
 app.use(express.static("public"));
 
 app.listen(port, () => {

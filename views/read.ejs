@@ -35,9 +35,17 @@
 <body>
 	<center>
 		<img id="samurai_image" src="/images/samurai.png" height="100px" width="100px" alt="Samurai">
-		<h1>The Wandering Samurai</h1>
-		<h2>Musings of a Lost Soul </h2>
-		<h3>By Hirosaki Miroshimo </h3>
+		<% details.forEach(function(detail){ %>
+			<p>
+				<h1><%= detail.title %></h1>
+			</p>
+			<p>
+				<h2><%= detail.subtitle %></h2>
+			</p>
+			<p>
+				<h3><%= detail.author %></h3>
+			</p>
+		<% }) %>
 	</center>
 	<% articles.forEach(function(article){ %>
 		<p>
@@ -67,7 +75,7 @@
 		</ul>
 	</p>
 	<p>
-		<a href="/"><input type=button value="Return to the author's homepage"></a>
+		<a href="/"><input type=button value="Return to the homepage"></a>
 	</p>
 </body>
 </html>   

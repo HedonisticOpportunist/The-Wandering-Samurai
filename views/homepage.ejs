@@ -4,16 +4,54 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="style.css">
 <head>
     <title>Reader - Home Page</title>
 </head>
+
+<%# STYLING %>
+<style>
+	body 
+	{
+		margin: 0px;
+		height: 100%;
+		background-color: #EAFDFC;
+		font-family: "Space Grotesk", sans-serif;
+		font-size: 12px;
+	}
+	
+	h1, h2
+	{
+		font-size: 13px; 
+	}
+		
+	#samurai_image
+	{
+		border-radius: 50%;
+	    float: left; 
+	}
+	
+	ul, ol
+	{
+		list-style-type: ' ☯ ';
+	
+	}	
+</style>
+
+<%# HTML BODY %>
 <body>
   <center>
 	<img id="samurai_image" src="/images/samurai.png" height="100px" width="100px" alt="Samurai">
-    <h1>The Wandering Samurai</h1>
-	<h2>Musings of a Lost Soul </h2>
-	<h3>By Hirosaki Miroshimo </h3>
+	<% details.forEach(function(detail){ %>
+		<p>
+			<h1><%= detail.title %></h1>
+		</p>
+		<p>
+			<h2><%= detail.subtitle %></h2>
+		</p>
+		<p>
+			<h3><%= detail.author %></h3>
+		</p>
+	<% }) %>
   </center>
   <h1> List of Published Articles </h1>
   <ul>

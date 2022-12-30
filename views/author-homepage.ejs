@@ -4,18 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="style.css">
 <head>
-    <title>Home Page</title>
+    <title>Author - Home Page:</title>
 </head>
 
-<%# STYLING %>
+ <%# STYLING %>
 <style>
-    body 
+	body 
 	{
 		margin: 0px;
 		height: 100%;
-		background-color: #9EA1D4;
+		background-color: #B5D5C5;
 		font-family: "Space Grotesk", sans-serif;
 		font-size: 11px; 
 	}
@@ -30,9 +29,15 @@
 		border-radius: 50%;
 	    float: left; 
 	}
+	
+	ul, ol
+	{
+		list-style-type: ' ☯ ';
+	
+	}	
 </style>
-  
-<%# HTML BODY %>
+ 
+ <%# HTML BODY %>
 <body>
 	<center>
 		<img id="samurai_image" src="/images/samurai.png" height="100px" width="100px" alt="Samurai">
@@ -48,23 +53,27 @@
 			</p>
 		<% }) %>
     </center>
+	<p>
+		<h2>Author's Homepage</h2>
+	</p>
+	<p>
+		<a href="settings"><input type=button value="Go to the settings page."></a>
+	</p>
+	<p>
+		<form action="/create-draft-article" method="post">
+			<button type="submit">Create a new draft article</button>
+		</form>
+	</p>
+	<h1> List of Published Articles </h1>
+  <ul>
 	<% articles.forEach(function(article){ %>
-		<form action="/edit_article" method="POST">
-			<p>
-				<input id="title" type="text" name="title" value=<%= article.title %> />
-			</p>
-			<p>
-				<input id="subtitle" type="text" name="subtitle" value=<%= article.subtitle %> />
-			</p>
-			<p>
-				<input id="text" type="text" name="text" value=<%= article.text %> />
-			</p>
-			<p>
-				<input type="submit" value="OK" />
-			</p>
-	 <% }) %>
-		<p>
-			<a href="/author-homepage"><input type=button value="Return to the author's homepage"></a>
-		</p>
+	<li 
+		id="article_published"> <a href="/read/<%= article.article_id %>"><%= article.title %>, <%= article.date_published %>, <%= article.number_of_likes %></a>,
+		<form action="/delete_article" method="post">
+			<button type="submit">Delete the article 🗑️ </button>
+		</form>
+	</li>
+	<% }) %>
+ </ul>
 </body>
 </html>   
