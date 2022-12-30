@@ -14,5 +14,10 @@ body
 	float: left; 
 }
 
+ul, ol
+{
+	list-style-type: ' ☯ ';
+}
+
 
 

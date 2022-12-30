@@ -10,33 +10,17 @@ CREATE TABLE IF NOT EXISTS articles_db
     title TEXT NOT NULL,
 	subtitle TEXT NOT NULL, 
 	text TEXT NOT NULL, 
+	status TEXT NOT NULL,
 	date_published TEXT NOT NULL, 
+	date_modified TEXT NOT NULL, 
 	number_of_likes INT NOT NULL
 );
 
+INSERT INTO articles_db (title, subtitle, text, status, date_published, date_modified, number_of_likes)
+VALUES('In the Mountains', 'The Start', 'I do not know where I am', 'Published', '11-01-2001', '11-01-2001', 0);
 
-
-CREATE TABLE IF NOT EXISTS testUsers (
-    test_user_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    test_name TEXT NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS testUserRecords (
-    test_record_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    test_record_value TEXT NOT NULL,
-    test_user_id  INT, --the user that the record belongs to
-    FOREIGN KEY (test_user_id) REFERENCES testUsers(test_user_id)
-);
-
---insert default data (if necessary here)
-
-INSERT INTO testUsers ("test_name") VALUES ("Simon Star");
-INSERT INTO testUserRecords ("test_record_value", "test_user_id") VALUES( "Lorem ipsum dolor sit amet", 1); 
-INSERT INTO articles_db (title, subtitle, text, date_published, number_of_likes)
-VALUES('In the Mountains', 'The Start', 'I do not know where I am', '11-01-2001', 0);
-
-INSERT INTO articles_db (title, subtitle, text, date_published, number_of_likes)
-VALUES('Up the Mountains', 'Lost', 'I still do not know where I am', '12-01-2001', 0);
+INSERT INTO articles_db (title, subtitle, text, status, date_published, date_modified, number_of_likes)
+VALUES('Up the Mountains', 'Lost', 'I still do not know where I am', 'Published', '12-01-2001','11-01-2001', 0);
 
 COMMIT;
 
