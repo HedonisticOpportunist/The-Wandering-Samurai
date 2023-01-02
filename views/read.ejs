@@ -65,13 +65,41 @@
 		</p>
 	<% }) %>
 	<p>
-		<button type="button">Like ♡ </button>
+		<form action="update-likes" method="post">
+			<button type="submit"> Like ♡ </button>
+		</form>
 	</p>
 	<p>
-		<input type="text" id="comment-box" placeholder="Enter comment">
-		<button id="post">Post</button>
-		<ul id="unordered">
-       
+	    <h3> Post a Comment </h3>
+		<form action="post-comment", method="post">
+			<p>
+				<label for="lname">Name:</label><br>
+			</p>
+			<p>
+				<input type="text" id="name" name="Name" value="A User">
+			</p>
+			<p>
+				<label for="date">Date Published:</label><br>
+			</p>
+			<p>
+				<input type="text" id="date" name="date" value="10/03/2030"> <br>
+			</p>
+			<p>
+				<input type="text" id="comment-box" placeholder="Enter a comment">
+			</p>
+			<p>
+				<button id="post">Post</button>
+			</p>
+		</form>
+	</p>
+	<p>
+		<h3> Reader Comments </h3>
+		<ul>
+			<% comments.forEach(function(comment){ %>
+			<p>
+				<li"> <%= comment.author %>, <%= comment.date_published %>, <%= comment.text %></li>
+			</p>
+			<% }) %>
 		</ul>
 	</p>
 	<p>
