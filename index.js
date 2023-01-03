@@ -22,7 +22,6 @@ global.db = new sqlite3.Database('./database.db',function(err)
 require("./routes/author")(app);
 require("./routes/reader")(app);
 
-
 // the views folder 
 app.set("views", __dirname + "/views");
 
@@ -31,10 +30,7 @@ app.set("view engine", "ejs");
 app.engine("html", require("ejs").renderFile);
 
 // enables the app to use the public directory 
-app.use(express.static("public"));
-
-/** Decode Form URL Encoded data */
-app.use(express.urlencoded());
+app.use(express.static("public"));p=
 
 // used for testing purposes 
 app.listen(port, () =>

@@ -58,9 +58,20 @@ module.exports = function (app)
 		res.render("edit.ejs", {details: detailRows, articles: selectedRows});
 	}))	
 	
+	/**
+	* Creates a new draft article 
+	**/
 	app.post("/create-draft-article", runAsyncWrapper(async(req, res) => 
 	{
 		res.send("Article sent."); 
+	}))	
+	
+	/**
+	* Creates a new draft article 
+	**/
+	app.post("/delete-article", runAsyncWrapper(async(req, res) => 
+	{
+		res.send("Article deleted."); 
 	}))	
 }
 	

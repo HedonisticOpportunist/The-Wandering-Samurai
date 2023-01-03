@@ -30,7 +30,8 @@ CREATE TABLE IF NOT EXISTS comments_db
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
     text TEXT NOT NULL,
 	author TEXT NOT NULL, 
-	date_published TEXT NOT NULL
+	date_published TEXT NOT NULL,
+	comment_id INTEGER NOT NULL REFERENCES articles_db (article_id)
 );
 
 -- CREATE ARTICLES --
@@ -45,11 +46,11 @@ INSERT INTO blog_settings_db (title, subtitle, author)
 VALUES('Lost in the Mountains', 'Tales of a Wandering Samurai', 'Kenshin Himura');
 
 -- CREATE SOME USER COMMENTS --
-INSERT INTO comments_db (text, author, date_published)
-VALUES('Awesome', 'Akita', '11-01-2002');
+INSERT INTO comments_db (text, author, date_published, comment_id)
+VALUES('Awesome', 'Akita', '11-01-2002', 1);
 
-INSERT INTO comments_db (text, author, date_published)
-VALUES('Still awesome', 'Kaoru', '11-01-2003');
+INSERT INTO comments_db (text, author, date_published, comment_id)
+VALUES('Still awesome', 'Kaoru', '11-01-2003', 4);
 
 COMMIT;
 

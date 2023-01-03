@@ -66,14 +66,16 @@
 	</p>
 	<h1> List of Published Articles </h1>
   <ul>
-	<% articles.forEach(function(article){ %>
-	<li 
-		id="article_published"> <a href="/read/<%= article.article_id %>"><%= article.title %>, <%= article.date_published %>, <%= article.number_of_likes %></a>,
-		<form action="/delete_article" method="post">
-			<button type="submit">Delete the article 🗑️ </button>
-		</form>
+	<p>
+		<% articles.forEach(function(article){ %>
+		<li 
+			id="article_published"> <a href="/read/<%= article.article_id %>"><%= article.title %>, <%= article.date_published %>, <%= article.number_of_likes %></a>,
+			<form action="delete-article" method="post">
+				<button type="submit">Delete the article 🗑️</button>
+			</form>
 	</li>
 	<% }) %>
+	</p>
  </ul>
 </body>
 </html>   
