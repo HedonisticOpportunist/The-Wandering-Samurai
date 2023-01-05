@@ -1,0 +1,55 @@
+body 
+{
+		margin: 0px;
+		height: 100%;
+		background-color: #EAFDFC;
+		font-family: "Space Grotesk", sans-serif;
+		font-size: 11px; 
+}
+	
+h1, h2
+{
+	font-size: 13px; 
+}
+		
+#samurai_image
+{
+		border-radius: 50%;
+	    float: left; 
+}
+	
+ul, ol
+{
+	list-style-type: ' ☯ ';
+}
+	
+.row
+{
+	clear:both
+}
+	
+.column
+{
+	width: 50%;
+	float: left;
+}
+	
+#author body 
+{
+	background-color: #B5D5C5;
+}
+
+#edit body 
+{
+	background-color: #9EA1D4;
+}
+
+#read body 
+{
+	background-color: #F5EDCE
+}
+
+#setting body
+{
+	background-color: #ECE8DD
+}

@@ -1,39 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<%# HTML HEADER %>
 <head>
-    <meta charset="UTF-8">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="/css/styles.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="style.css">
-<head>
     <title>Home Page</title>
 </head>
 
-<%# STYLING %>
-<style>
-    body 
-	{
-		margin: 0px;
-		height: 100%;
-		background-color: #9EA1D4;
-		font-family: "Space Grotesk", sans-serif;
-		font-size: 11px; 
-	}
-	
-	h1, h2
-	{
-		font-size: 13px; 
-	}
-		
-	#samurai_image
-	{
-		border-radius: 50%;
-	    float: left; 
-	}
-</style>
-  
 <%# HTML BODY %>
-<body>
+<body id="edit">
 	<center>
 		<img id="samurai_image" src="/images/samurai.png" height="100px" width="100px" alt="Samurai">
 		<% details.forEach(function(detail){ %>
@@ -49,7 +27,7 @@
 		<% }) %>
     </center>
 	<% articles.forEach(function(article){ %>
-		<form action="/edit_article" method="POST">
+		<form action="edit-article" method="POST">
 			<p>
 				<input id="title" type="text" name="title" value=<%= article.title %> />
 			</p>
@@ -60,9 +38,11 @@
 				<input id="text" type="text" name="text" value=<%= article.text %> />
 			</p>
 			<p>
-				<input type="submit" value="OK" />
+				<button id="submit">Save the changes 👻</button>
 			</p>
 	 <% }) %>
+	 
+	    <%# RETURN TO HOMEPAGE %>
 		<p>
 			<a href="/author-homepage"><input type=button value="Return to the author's homepage"></a>
 		</p>

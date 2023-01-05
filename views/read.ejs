@@ -1,109 +1,111 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<head>
-    <title>Reader - Article Page:</title>
-</head>
+<html lang="en"><%# HTML HEAD %> 
 
- <%# STYLING %>
-<style>
-    body 
-	{
-		margin: 0px;
-		height: 100%;
-		background-color: #F5EDCE;
-		font-family: "Space Grotesk", sans-serif;
-		font-size: 11px; 
-	}
+    <%# HTML HEADER %>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="/css/styles.css">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Reader - Article Page:</title>
+	</head>
 	
-	h1, h2
-	{
-		font-size: 13px; 
-	}
-		
-	#samurai_image
-	{
-		border-radius: 50%;
-	    float: left; 
-	}
-  </style>
-  
-<%# HTML BODY %>
-<body>
+  <%# HTML BODY %>
+  <body id="read">
 	<center>
-		<img id="samurai_image" src="/images/samurai.png" height="100px" width="100px" alt="Samurai">
-		<% details.forEach(function(detail){ %>
+		<img id="samurai_image" src="/images/samurai.png" height="100px" width="100px" 
+		alt="Samurai">
+		<% details.forEach(function(detail){ %> 
 			<p>
-				<h1><%= detail.title %></h1>
+				<h1><%= detail.title %> </h1>
 			</p>
 			<p>
-				<h2><%= detail.subtitle %></h2>
+				<h2><%= detail.subtitle %> </h2>
 			</p>
 			<p>
-				<h3><%= detail.author %></h3>
+				<h3><%= detail.author %> </h3>
 			</p>
 		<% }) %>
-	</center>
-	<% articles.forEach(function(article){ %>
+    </center>
+	
+	 <%# ARTICLE %>
+	<% articles.forEach(function(article){ %> 
 		<p>
-			<h1><%= article.title %></h1>
+			<h1><%= article.title %> </h1>
 		</p>
 		<p>
-			<h2><%= article.subtitle %></h2>
+			<h2><%= article.subtitle %> </h2>
 		</p>
 		<p>
-			<%= article.text %>
+			<%= article.text %> 
 		</p>
-		<p>
-			Date published: <%= article.date_published %>
+		<p id="article_id"> 
+			Article id: <%= article.article_id %> 
 		</p>
-		<p>
+		<p> 
+			Date published: <%= article.date_published %> 
+		</p>
+		<p> 
 			Number of likes: <%= article.number_of_likes %>
 		</p>
-	<% }) %>
+	<% }) %> 
+	
+	<%# NUMBER OF LIKES %>
 	<p>
-		<form action="likes" method="post">
-			<button id=type="submit"> Like ♡ </button>
-		</form>
-	</p>
-	<p>
-	    <h3> Post a Comment </h3>
-		<form action="comment", method="post">
-			<p>
-				<label for="lname">Name:</label><br>
-			</p>
-			<p>
-				<input type="text" id="name" name="Name" value="A User">
-			</p>
-			<p>
-				<label for="date">Date Published:</label><br>
-			</p>
-			<p>
-				<input type="text" id="date" name="date" value="10/03/2030"> <br>
-			</p>
-			<p>
-				<input type="text" id="comment-box" placeholder="Enter a comment">
-			</p>
-			<p>
-				<button id="post">Post</button>
-			</p>
-		</form>
-	</p>
-	<p>
-		<h3> Reader Comments </h3>
-		<ul>
-			<% comments.forEach(function(comment){ %>
-			<p>
-				<li"> <%= comment.author %>, <%= comment.date_published %>, <%= comment.text %></li>
-			</p>
+		
+			<% articles.forEach(function(article){ %> 
+				<form action="number_of_likes" method="post">
+					<button type="submit"> Like ♡ </button>
+					<input type="hidden" id="article_id" name="article_id" value=<%= article.article_id %>>
+				</form>
 			<% }) %>
-		</ul>
-	</p>
-	<p>
-		<a href="/"><input type=button value="Return to the homepage"></a>
-	</p>
-</body>
-</html>   
+    </p>
+	
+	<%# COMMENTS %>
+    <p>
+		<h3> Post a Comment </h3>
+			<form action="comments" method="post">
+				<p>
+					<label for="comment">Comment:</label> 
+				</p>
+				<p>
+					<input type="text" id="comment-box" name="textComment" value='Comment'> 
+				</p>
+				<p>
+					<label for="lname">Name:</label> 
+				</p>
+				<p>
+					<input type="text" id="name" name="author" value='User'> 
+				</p>
+				<p>
+					<label for="date">Date Published:</label> 
+				</p>
+				<p>
+					<input type="text" id="date" name="date_published" value='10/03/2030'> 
+				</p>
+				<p>
+					<% articles.forEach(function(article){ %> 
+						<input type="hidden" id="article_id" name="article_id" value=<%= article.article_id %>> 
+					<% }) %> 
+				</p>
+				<p>
+					<button id="submit">Leave a comment</button>
+				</p>
+			</form>
+			<h3> Reader Comments </h3>
+			<ul>
+				<p>
+					<% comments.forEach(function(comment){ %> 
+						<li>
+							<%= comment.author %>, <%= comment.date_published %>, <%= comment.text %> 
+						</li>
+					<% }) %> 
+				</p>
+			</ul>
+			
+		<%# RETURN TO HOMEPAGE %>
+		<p>
+			<a href="/"><input type=button value="Return to the homepage"></a>
+		</p>
+  </body>
+</html>

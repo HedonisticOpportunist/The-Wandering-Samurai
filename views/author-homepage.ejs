@@ -1,81 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<head>
-    <title>Author - Home Page:</title>
-</head>
 
- <%# STYLING %>
-<style>
-	body 
-	{
-		margin: 0px;
-		height: 100%;
-		background-color: #B5D5C5;
-		font-family: "Space Grotesk", sans-serif;
-		font-size: 11px; 
-	}
-	
-	h1, h2
-	{
-		font-size: 13px; 
-	}
-		
-	#samurai_image
-	{
-		border-radius: 50%;
-	    float: left; 
-	}
-	
-	ul, ol
-	{
-		list-style-type: ' ☯ ';
-	
-	}	
-</style>
- 
- <%# HTML BODY %>
-<body>
-	<center>
-		<img id="samurai_image" src="/images/samurai.png" height="100px" width="100px" alt="Samurai">
-		<% details.forEach(function(detail){ %>
-			<p>
-				<h1><%= detail.title %></h1>
-			</p>
-			<p>
-				<h2><%= detail.subtitle %></h2>
-			</p>
-			<p>
-				<h3><%= detail.author %></h3>
-			</p>
-		<% }) %>
-    </center>
-	<p>
-		<h2>Author's Homepage</h2>
-	</p>
-	<p>
-		<a href="settings"><input type=button value="Go to the settings page."></a>
-	</p>
-	<p>
-		<form action="create-draft-article" method="post">
-			<button type="submit">Create a new draft article</button>
-		</form>
-	</p>
-	<h1> List of Published Articles </h1>
-  <ul>
-	<p>
-		<% articles.forEach(function(article){ %>
-		<li 
-			id="article_published"> <a href="/read/<%= article.article_id %>"><%= article.title %>, <%= article.date_published %>, <%= article.number_of_likes %></a>,
-			<form action="delete-article" method="post">
-				<button type="submit">Delete the article 🗑️</button>
+	<%# HTML HEADER %>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="/css/styles.css">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Author - Home Page:</title>
+	</head>
+
+	<%# HTML BODY %>
+	<body id="author">
+		<center>
+			<img id="samurai_image" src="/images/samurai.png" height="100px" width="100px" alt="Samurai">
+			<% details.forEach(function(detail){ %>
+				<p>
+					<h1><%= detail.title %></h1>
+				</p>
+				<p>
+					<h2><%= detail.subtitle %></h2>
+				</p>
+				<p>
+					<h3><%= detail.author %></h3>
+				</p>
+			<% }) %>
+		</center>
+		<p>
+			<h2>Author's Homepage</h2>
+		</p>
+		<p>
+			<a href="settings"><input type=button value="Go to the settings page"></a>
+		</p>
+		<p>
+			<%# UPDATE %>
+			<h3> Create a New Draft Article </h3>
+			<form action="create-draft-article" method="post">
+				<p>
+					<label for="title">Title:</label> 
+				</p>
+				<p>
+					<input type="text" id="title-box" name="title" value='Lost'> 
+				</p>
+				<p>
+					<label for="subtitle">Subtitle:</label> 
+				</p>
+				<p>
+					<input type="text" id="subtitle" name="subtitle" value='Help'> 
+				</p>
+				<p>
+					<label for="text">Text:</label> 
+				</p>
+				<p>
+					<input type="text" id="text" name="text" value='Where am I?'> 
+				</p>
+				<p>
+					<label for="status">Status:</label> 
+				</p>
+				<p>
+					<input type="text" id="status" name="status" value='Draft'> 
+				</p>
+				<p>
+					<button id="submit">Create a new draft 👻</button>
+				</p>
 			</form>
-	</li>
-	<% }) %>
-	</p>
- </ul>
-</body>
+		</p>
+	
+		<%# LISTS %>
+		<div class="row">
+			<div class="column">
+		
+				<%# PUBLISHED ARTICLES %>
+				<h1> List of Published Articles </h1>
+					<ul>
+						<p>
+							<% articles.forEach(function(article){ %>
+								<li id="article_published"> 
+									<a href="/edit/<%= article.article_id %>"><%= article.title %>, <%= article.date_published %>, <%= article.number_of_likes %></a>
+									
+									<%# DELETE %>
+									<form action="delete-article" method="post">
+										<button type="submit">Delete the article 🗑️️️</button>
+										<input type="hidden" id="article_id" name="article_id" value=<%= article.article_id %>>
+									</form>
+								</li>
+						<% }) %>
+					</p>
+			</ul>
+		</div>
+		
+		<%# DRAFT ARTICLES %>
+		<div class="column">
+			<h1> List of Draft Articles </h1>
+			<ul>
+				<p>
+					<% drafts.forEach(function(draft){ %>
+						<li id="article_published"> 
+							<a href="/edit/<%= draft.article_id %>"><%= draft.title %>, <%= draft.date_published %>, <%= draft.date_modified %>, <%= draft.number_of_likes %></a>
+							<%# PUBLSIH %>
+							<form action="publish-article" method="post">
+								<button type="submit">Publish the article ☺️️</button>
+								<input type="hidden" id="article_id" name="article_id" value=<%= draft.article_id %>>
+							</form>
+						</li>
+						<% }) %>
+					</p>
+				</ul>
+			</div>
+		</div>
+	</body>
 </html>   

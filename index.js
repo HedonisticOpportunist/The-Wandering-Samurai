@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const sqlite3 = require('sqlite3').verbose();
+const path = require('path');
 
 // items in the global namespace are accessible throught out the node application
 global.db = new sqlite3.Database('./database.db',function(err)
@@ -30,7 +31,7 @@ app.set("view engine", "ejs");
 app.engine("html", require("ejs").renderFile);
 
 // enables the app to use the public directory 
-app.use(express.static("public"));p=
+app.use(express.static("public"));
 
 // used for testing purposes 
 app.listen(port, () =>

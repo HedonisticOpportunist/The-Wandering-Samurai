@@ -1,63 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<head>
-    <title>Reader - Home Page</title>
-</head>
 
-<%# STYLING %>
-<style>
-	body 
-	{
-		margin: 0px;
-		height: 100%;
-		background-color: #EAFDFC;
-		font-family: "Space Grotesk", sans-serif;
-		font-size: 12px;
-	}
-	
-	h1, h2
-	{
-		font-size: 13px; 
-	}
-		
-	#samurai_image
-	{
-		border-radius: 50%;
-	    float: left; 
-	}
-	
-	ul, ol
-	{
-		list-style-type: ' ☯ ';
-	
-	}	
-</style>
+    <%# HTML HEADER %>
+	<head>
+		<link rel="stylesheet" href="/css/styles.css">
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Reader - Home Page</title>
+	</head>
 
-<%# HTML BODY %>
-<body>
-  <center>
-	<img id="samurai_image" src="/images/samurai.png" height="100px" width="100px" alt="Samurai">
-	<% details.forEach(function(detail){ %>
-		<p>
-			<h1><%= detail.title %></h1>
-		</p>
-		<p>
-			<h2><%= detail.subtitle %></h2>
-		</p>
-		<p>
-			<h3><%= detail.author %></h3>
-		</p>
-	<% }) %>
-  </center>
-  <h1> List of Published Articles </h1>
-  <ul>
-	<% articles.forEach(function(article){ %>
-	<li id="article_published"> <a href="/read/<%= article.article_id %>"><%= article.title %>, <%= article.date_published %></a></li>
-	<% }) %>
- </ul>
-</body>
+	<%# HTML BODY %>
+	<body>
+		<center>
+			<img id="samurai_image" src="/images/samurai.png" height="100px" width="100px" alt="Samurai">
+			<% details.forEach(function(detail){ %>
+				<p>
+				<h1><%= detail.title %></h1>
+				</p>
+				<p>
+					<h2><%= detail.subtitle %></h2>
+				</p>
+				<p>
+					<h3><%= detail.author %></h3>
+				</p>
+			<% }) %>
+		</center>
+		<h1> List of Published Articles </h1>
+			<ul>
+				<% articles.forEach(function(article){ %>
+					<li id="article_published"> 
+						<a href="/read/<%= article.article_id %>"><%= article.title %>, <%= article.date_published %></a>
+					</li>
+				<% }) %>
+			</ul>
+	</body>
 </html>   

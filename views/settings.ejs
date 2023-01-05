@@ -1,59 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<head>
-    <title>Author - Settings Page:</title>
-</head>
 
-<%# STYLING %>
-<style>
-    body 
-	{
-		margin: 0px;
-		height: 100%;
-		background-color: #ECE8DD;
-		font-family: "Space Grotesk", sans-serif;
-		font-size: 11px; 
-	}
+<%# HTML HEADER %>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="/css/styles.css">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Author - Settings Page:</title>
+	</head>
 	
-	h1, h2
-	{
-		font-size: 13px; 
-	}
+	<%# HTML BODY %>
+	<body id="settings">
+		<center>
+			<img id="samurai_image" src="/images/samurai.png" height="100px" width="100px" alt="Samurai">
+			<h1>Settings Page </h1>
+		</center>
 		
-	#samurai_image
-	{
-		border-radius: 50%;
-	    float: left; 
-	}
-</style>
-  
-<%# HTML BODY %>
-<body>
-	<center>
-		<img id="samurai_image" src="/images/samurai.png" height="100px" width="100px" alt="Samurai">
-		<h1>Settings Page </h1>
-	</center>
-	<% details.forEach(function(detail){ %>
-		<form action="/edit_settings" method="POST">
+		<%# SETTINGS FORM %>
+		<% details.forEach(function(detail){ %>
+			<form action="edit-settings" method="POST">
+				<p>
+					<input id="title" type="text" name="title" value=<%= detail.title %> />
+				</p>
+				<p>
+					<input id="subtitle" type="text" name="subtitle" value=<%= detail.subtitle %> />
+				</p>
+				<p>
+					<input id="author" type="text" name="author" value=<%= detail.author %> />
+				</p>
+				<p>
+					<button id="submit">Edit the settings 👻</button>
+				</p>
+			  </form>
+			<% }) %>
+			
+			<%# RETURN TO AUTHOR'S HOMEPAGE %>
 			<p>
-				<input id="title" type="text" name="title" value=<%= detail.title %> />
+				<a href="/author-homepage"><input type=button value="Return to the author's homepage"></a>
 			</p>
-			<p>
-				<input id="subtitle" type="text" name="subtitle" value=<%= detail.subtitle %> />
-			</p>
-			<p>
-				<input id="author" type="text" name="author" value=<%= detail.author %> />
-			</p>
-			<p>
-				<input type="submit" value="OK" />
-			</p>
-	 <% }) %>
-		<p>
-			<a href="/author-homepage"><input type=button value="Return to the author's homepage"></a>
-		</p>
-</body>
+		</body>
 </html>   

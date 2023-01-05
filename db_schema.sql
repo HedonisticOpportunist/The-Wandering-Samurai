@@ -10,9 +10,9 @@ CREATE TABLE IF NOT EXISTS articles_db
 	subtitle TEXT NOT NULL, 
 	text TEXT NOT NULL, 
 	status TEXT NOT NULL,
-	date_published TEXT NOT NULL, 
-	date_modified TEXT NOT NULL, 
-	number_of_likes INT NOT NULL
+	date_published TEXT, 
+	date_modified TEXT, 
+	number_of_likes INT
 );
 
 -- DETAIL SETTINGS TABLE  --
@@ -32,14 +32,22 @@ CREATE TABLE IF NOT EXISTS comments_db
 	author TEXT NOT NULL, 
 	date_published TEXT NOT NULL,
 	comment_id INTEGER NOT NULL REFERENCES articles_db (article_id)
+	ON DELETE CASCADE
 );
 
--- CREATE ARTICLES --
+-- CREATE PUBLISHED ARTICLES --
 INSERT INTO articles_db (title, subtitle, text, status, date_published, date_modified, number_of_likes)
-VALUES('In the Mountains', 'The Start', 'I do not know where I am', 'Published', '11-01-2001', '11-01-2001', 0);
+VALUES('In the Mountains', 'The Start', 'I do not know where I am.', 'Published', '11/01/2001', '11-01-2001', 0);
 
 INSERT INTO articles_db (title, subtitle, text, status, date_published, date_modified, number_of_likes)
-VALUES('Up the Mountains', 'Lost', 'I still do not know where I am', 'Published', '12-01-2001','11-01-2001', 0);
+VALUES('Up the Mountains', 'Lost', 'I still do not know where I am.', 'Published', '12/01/2001','11-01-2001', 0);
+
+-- CREATE DRAFT ARTICLES --
+INSERT INTO articles_db (title, subtitle, text, status, date_published, date_modified, number_of_likes)
+VALUES('Near the Mountains', 'Where am I?', 'I am lost', 'Draft', '11/01/2003', '11-01-2001', 0);
+
+INSERT INTO articles_db (title, subtitle, text, status, date_published, date_modified, number_of_likes)
+VALUES('Lost in the Mountains', 'Where is my map?', 'I have lost my map.', 'Draft', '12/01/2001','11-01-2001', 0);
 
 -- CREATE CURRENT AUTHOR SETTINGS
 INSERT INTO blog_settings_db (title, subtitle, author)
@@ -47,10 +55,10 @@ VALUES('Lost in the Mountains', 'Tales of a Wandering Samurai', 'Kenshin Himura'
 
 -- CREATE SOME USER COMMENTS --
 INSERT INTO comments_db (text, author, date_published, comment_id)
-VALUES('Awesome', 'Akita', '11-01-2002', 1);
+VALUES('Awesome', 'Akita', '11/01/2002', 1);
 
 INSERT INTO comments_db (text, author, date_published, comment_id)
-VALUES('Still awesome', 'Kaoru', '11-01-2003', 4);
+VALUES('Still awesome', 'Kaoru', '11/01/2003', 2);
 
 COMMIT;
 
