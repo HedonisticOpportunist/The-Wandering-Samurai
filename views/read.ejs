@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><%# HTML HEAD %> 
 
-    <%# HTML HEADER %>
+    <%# HTML HEAD %>
 	<head>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="/css/styles.css">
@@ -10,24 +10,26 @@
 		<title>Reader - Article Page:</title>
 	</head>
 	
+	 <%# HTML HEADER %>
+	<header>
+		<div class="container">
+			<img id="samurai_image" src="/images/samurai.png" alt="Samurai">
+			<% details.forEach(function(detail){ %>
+				<p>
+				<h1><%= detail.title %></h1>
+				</p>
+				<p>
+					<h2><%= detail.subtitle %></h2>
+				</p>
+				<p>
+					<h3><%= detail.author %></h3>
+				</p>
+			<% }) %>
+		</div>
+	</header>
+	
   <%# HTML BODY %>
   <body id="read">
-	<center>
-		<img id="samurai_image" src="/images/samurai.png" height="100px" width="100px" 
-		alt="Samurai">
-		<% details.forEach(function(detail){ %> 
-			<p>
-				<h1><%= detail.title %> </h1>
-			</p>
-			<p>
-				<h2><%= detail.subtitle %> </h2>
-			</p>
-			<p>
-				<h3><%= detail.author %> </h3>
-			</p>
-		<% }) %>
-    </center>
-	
 	 <%# ARTICLE %>
 	<% articles.forEach(function(article){ %> 
 		<p>
@@ -52,13 +54,12 @@
 	
 	<%# NUMBER OF LIKES %>
 	<p>
-		
-			<% articles.forEach(function(article){ %> 
-				<form action="number_of_likes" method="post">
-					<button type="submit"> Like ♡ </button>
-					<input type="hidden" id="article_id" name="article_id" value=<%= article.article_id %>>
-				</form>
-			<% }) %>
+		<% articles.forEach(function(article){ %> 
+			<form action="number_of_likes" method="post">
+				<button class="action-btn-grad" type="submit"> Like ♡ </button>
+				<input type="hidden" id="article_id" name="article_id" value=<%= article.article_id %>>
+			</form>
+		<% }) %>
     </p>
 	
 	<%# COMMENTS %>
@@ -89,7 +90,7 @@
 					<% }) %> 
 				</p>
 				<p>
-					<button id="submit">Leave a comment</button>
+					<button class="action-btn-grad" id="submit">Leave a comment</button>
 				</p>
 			</form>
 			<h3> Reader Comments </h3>
@@ -105,7 +106,14 @@
 			
 		<%# RETURN TO HOMEPAGE %>
 		<p>
-			<a href="/"><input type=button value="Return to the homepage"></a>
+			<a href="/"><input type=button class="navigation-btn-grad" value="Return to the homepage"></a>
 		</p>
-  </body>
+	</body>
+	
+	<%# FOOTER %>
+	<footer>
+		<div class="container">
+			<p>&copy; 2020 Ghost and Snow</p>
+		</div>
+	</footer>
 </html>

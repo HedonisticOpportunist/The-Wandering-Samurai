@@ -8,8 +8,19 @@ CREATE TABLE IF NOT EXISTS articles_db
 	article_id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
 	subtitle TEXT NOT NULL, 
-	text TEXT NOT NULL, 
-	status TEXT NOT NULL,
+	text TEXT NOT NULL,
+	date_published TEXT, 
+	date_modified TEXT, 
+	number_of_likes INT
+);
+
+-- DRAFTS TABLE--
+CREATE TABLE IF NOT EXISTS drafts_db 
+(
+	draft_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+	subtitle TEXT NOT NULL, 
+	text TEXT NOT NULL,
 	date_published TEXT, 
 	date_modified TEXT, 
 	number_of_likes INT
@@ -36,18 +47,18 @@ CREATE TABLE IF NOT EXISTS comments_db
 );
 
 -- CREATE PUBLISHED ARTICLES --
-INSERT INTO articles_db (title, subtitle, text, status, date_published, date_modified, number_of_likes)
-VALUES('In the Mountains', 'The Start', 'I do not know where I am.', 'Published', '11/01/2001', '11-01-2001', 0);
+INSERT INTO articles_db (title, subtitle, text, date_published, date_modified, number_of_likes)
+VALUES('In the Mountains', 'The Start', 'I do not know where I am.', '11/01/2001', '11-01-2001', 0);
 
-INSERT INTO articles_db (title, subtitle, text, status, date_published, date_modified, number_of_likes)
-VALUES('Up the Mountains', 'Lost', 'I still do not know where I am.', 'Published', '12/01/2001','11-01-2001', 0);
+INSERT INTO articles_db (title, subtitle, text, date_published, date_modified, number_of_likes)
+VALUES('Up the Mountains', 'Lost', 'I still do not know where I am.', '12/01/2001','11-01-2001', 0);
 
 -- CREATE DRAFT ARTICLES --
-INSERT INTO articles_db (title, subtitle, text, status, date_published, date_modified, number_of_likes)
-VALUES('Near the Mountains', 'Where am I?', 'I am lost', 'Draft', '11/01/2003', '11-01-2001', 0);
+INSERT INTO drafts_db (title, subtitle, text, date_published, date_modified, number_of_likes)
+VALUES('Near the Mountains', 'Where am I?', 'I am lost', '11/01/2003', '11-01-2001', 0);
 
-INSERT INTO articles_db (title, subtitle, text, status, date_published, date_modified, number_of_likes)
-VALUES('Lost in the Mountains', 'Where is my map?', 'I have lost my map.', 'Draft', '12/01/2001','11-01-2001', 0);
+INSERT INTO drafts_db (title, subtitle, text, date_published, date_modified, number_of_likes)
+VALUES('Lost in the Mountains', 'Where is my map?', 'I have lost my map.', '12/01/2001','11-01-2001', 0);
 
 -- CREATE CURRENT AUTHOR SETTINGS
 INSERT INTO blog_settings_db (title, subtitle, author)

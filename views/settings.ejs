@@ -10,13 +10,26 @@
 		<title>Author - Settings Page:</title>
 	</head>
 	
+	 <%# HTML HEADER %>
+	<header>
+		<div class="container">
+			<img id="samurai_image" src="/images/samurai.png" alt="Samurai">
+			<% details.forEach(function(detail){ %>
+				<p>
+				<h1><%= detail.title %></h1>
+				</p>
+				<p>
+					<h2><%= detail.subtitle %></h2>
+				</p>
+				<p>
+					<h3><%= detail.author %></h3>
+				</p>
+			<% }) %>
+		</div>
+	</header>
+	
 	<%# HTML BODY %>
-	<body id="settings">
-		<center>
-			<img id="samurai_image" src="/images/samurai.png" height="100px" width="100px" alt="Samurai">
-			<h1>Settings Page </h1>
-		</center>
-		
+	<body>
 		<%# SETTINGS FORM %>
 		<% details.forEach(function(detail){ %>
 			<form action="edit-settings" method="POST">
@@ -30,14 +43,21 @@
 					<input id="author" type="text" name="author" value=<%= detail.author %> />
 				</p>
 				<p>
-					<button id="submit">Edit the settings 👻</button>
+					<button class="action-btn-grad" id="submit">Edit the settings 👻</button>
 				</p>
 			  </form>
 			<% }) %>
 			
 			<%# RETURN TO AUTHOR'S HOMEPAGE %>
 			<p>
-				<a href="/author-homepage"><input type=button value="Return to the author's homepage"></a>
+				<a href="/author-homepage"><input type=button class="navigation-btn-grad" value="Return to the author's homepage"></a>
 			</p>
 		</body>
+		
+		<%# FOOTER %>
+		<footer>
+			<div class="container">
+				<p>&copy; 2020 Ghost and Snow</p>
+			</div>
+		</footer>
 </html>   

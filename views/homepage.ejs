@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <%# HTML HEADER %>
+    <%# HTML HEAD %>
 	<head>
 		<link rel="stylesheet" href="/css/styles.css">
 		<meta charset="UTF-8">
@@ -9,11 +9,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Reader - Home Page</title>
 	</head>
-
-	<%# HTML BODY %>
-	<body>
-		<center>
-			<img id="samurai_image" src="/images/samurai.png" height="100px" width="100px" alt="Samurai">
+	
+	 <%# HTML HEADER %>
+	<header>
+		<div class="container">
+			<img id="samurai_image" src="/images/samurai.png" alt="Samurai">
 			<% details.forEach(function(detail){ %>
 				<p>
 				<h1><%= detail.title %></h1>
@@ -25,7 +25,11 @@
 					<h3><%= detail.author %></h3>
 				</p>
 			<% }) %>
-		</center>
+		</div>
+	</header>
+
+	<%# HTML BODY %>
+	<body>
 		<h1> List of Published Articles </h1>
 			<ul>
 				<% articles.forEach(function(article){ %>
@@ -35,4 +39,11 @@
 				<% }) %>
 			</ul>
 	</body>
+	
+	<%# FOOTER %>
+	<footer>
+		<div class="container">
+			<p>&copy; 2020 Ghost and Snow</p>
+		</div>
+	</footer>
 </html>   

@@ -1,39 +1,20 @@
+/*
+* CSS STYLESHEET
+*/
+
+/* Body-related styling */
+/* Most pages have a different background colour */
+
 body 
 {
-		margin: 0px;
-		height: 100%;
-		background-color: #EAFDFC;
-		font-family: "Space Grotesk", sans-serif;
-		font-size: 11px; 
+	margin: 0px;
+	height: 100%;
+	background-color: #EAFDFC;
+	font-family: "Space Grotesk", sans-serif;
+	font-size: 11px; 
+	margin: 0;
 }
-	
-h1, h2
-{
-	font-size: 13px; 
-}
-		
-#samurai_image
-{
-		border-radius: 50%;
-	    float: left; 
-}
-	
-ul, ol
-{
-	list-style-type: ' ☯ ';
-}
-	
-.row
-{
-	clear:both
-}
-	
-.column
-{
-	width: 50%;
-	float: left;
-}
-	
+
 #author body 
 {
 	background-color: #B5D5C5;
@@ -52,4 +33,107 @@ ul, ol
 #setting body
 {
 	background-color: #ECE8DD
+}  
+
+/* Header related-styling */
+/* The header consists of an image, a blue background and purple font */
+
+#samurai_image
+{
+	border-radius: 50%;
+	border: 1px solid #ddd;
+	padding: 2px;
+	width: 18%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	/* reflect the image to the right with gradient effect */
+	-webkit-box-reflect: right 10px; 
 }
+
+header 
+{
+	background-color: #89C4E1;
+	color: #58287F;
+}
+
+.container 
+{
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 25px;
+}
+	
+
+/* Button styling */
+/* NOTE: Not created by me */
+/* However, I have made slight modifications */
+/* attribution: https://gradientbuttons.colorion.co/ */
+.action-btn-grad 
+{
+	background-image: linear-gradient(to right, #1FA2FF 0%, #12D8FA  51%, #1FA2FF  100%);
+	margin: 10px;
+	padding: 15px 45px;
+	text-align: center;
+	text-transform: uppercase;
+	transition: 0.5s;
+	background-size: 200% auto;
+	color: white;            
+	box-shadow: 0 0 20px #eee;
+	border-radius: 10px;
+	display: block;
+}
+
+.action-btn-grad:hover 
+{
+	background-position: right center; /* change the direction of the change here */
+	color: #fff;
+	text-decoration: none;
+}
+
+.navigation-btn-grad 
+{
+	background-image: linear-gradient(to right, #DD5E89 0%, #F7BB97  51%, #DD5E89  100%);
+	margin: 10px;
+	padding: 15px 45px;
+	text-align: center;
+	text-transform: uppercase;
+	transition: 0.5s;
+	background-size: 200% auto;
+	color: white;            
+	box-shadow: 0 0 20px #eee;
+	border-radius: 10px;
+	display: block;
+}
+
+.navigation-btn-grad:hover 
+{
+	background-position: right center; /* change the direction of the change here */
+	color: #fff;
+	text-decoration: none;
+}
+         
+/* Page component styling */
+h1, h2
+{
+	font-size: 13px;
+	text-transform: uppercase;
+}
+	
+ul, ol
+{
+	list-style-type: ' ☯⚔️ ';
+}
+	
+.row
+{
+	clear:both
+}
+	
+.column
+{
+	width: 50%;
+	float: left;
+}
+	

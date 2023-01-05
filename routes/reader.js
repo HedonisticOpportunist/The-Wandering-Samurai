@@ -24,7 +24,7 @@ module.exports = function(app)
 		let detailRows = await queryDatabase(blogDetailsQuery);
 		
 		// retrieve the currently published articles stored in the database 
-		const articleQuery = "SELECT * FROM articles_db WHERE status = 'Published' ORDER BY date_published DESC";
+		const articleQuery = "SELECT * FROM articles_db ORDER BY date_published DESC";
 		let articleRows = await queryDatabase(articleQuery);
 		
 		// render the reader home page with tbe blog details and articles 
