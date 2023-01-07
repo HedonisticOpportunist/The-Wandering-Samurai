@@ -10,69 +10,75 @@ module.exports = function (app)
 	/**
 	* PURPOSE:
 	* The following get route retrieves:  
-	* a) title, subtile and author of the blog 
-	* b) the currently published articles ordered by their publication date 
-	* c) articles that are currently in draft ordered by their publication date 
+	* a) The title, subtile and author of the blog 
+	* b) The currently published articles ordered by their publication date 
+	* c) Any articles that are currently in draft ordered by their publication date 
 	* INPUTS:
-	* the router url, the request and the response
+	* The router url, the request and the response
 	* OUTPUTS:
-	* A rendered page that displays a list of articles and drafts 
+	* A rendered author's homepage that displays a list of articles and drafts 
 	**/
 	app.get('/author-homepage', runAsyncWrapper(async(req, res) => 
 	{
-		// retrieve the blog-related details stored in the database 
+		// Retrieve the blog-related details stored in the database 
 		const blogDetailsQuery = "SELECT * FROM blog_settings_db";
 		let detailRows = await queryDatabase(blogDetailsQuery);
 		
-		// retrieve the currently published articles stored in the database 
+		// Retrieve the currently published articles stored in the database 
 		const articleQuery = "SELECT * FROM articles_db ORDER BY date_published DESC";
 		let articleRows = await queryDatabase(articleQuery);
 		
-		// retrieve articles from the drafts table 
+		// Retrieve drafts from the drafts table 
 		const draftQuery = "SELECT * FROM drafts_db ORDER BY date_published DESC";
 		let draftRows = await queryDatabase(draftQuery);
 		
-		// render the reader home page with tbe blog details and articles 
+		// Render the reader home page with the blog details, drafts and articles 
 		res.render("author-homepage.ejs", { details: detailRows, articles : articleRows, drafts: draftRows });
 	}))
 	
 	/**
-	* The following route retrieves: title, subtile and author of the blog 
-	* these are populated in the ejs template of the route 
+	* PURPOSE:
+	* The following route retrieves: 
+	* a) The title, subtile and author of the blog 
+	* b) These values are populated in the ejs template of the settings view  
+	* INPUTS:
+	* The router url, the request and the response
+	* OUTPUTS:
+	* A rendered page that displays the blog settings 
 	**/
 	app.get('/settings', runAsyncWrapper(async(req, res) => 
 	{
-		// retrieve the blog-related details stored in the database 
+		// Retrieve the blog-related details stored in the database 
 		const blogDetailsQuery = "SELECT * FROM blog_settings_db";
 		let detailRows = await queryDatabase(blogDetailsQuery);
 		
-		// render the reader home page with tbe blog details and articles 
+		// Render the reader home page with tbe blog details and articles 
 		res.render("settings.ejs", {details: detailRows});
 	}))
 	
 	/**
 	* PURPOSE:
 	* The following get route retrieves:  
-	* a) title, subtile and author of the blog 
-	* b) a draft retrieved by its id  
+	* a) The title, subtile and author of the blog 
+	* b) A draft retrieved by its id  
 	* INPUTS:
-	* the router url, the request and the response
+	* The router url, the request and the response
 	* OUTPUTS:
-	* A rendered page that displays a draft 
+	* A rendered page that displays a draft based on its id 
 	**/
 	app.get("/edit-draft/:id", runAsyncWrapper(async(req, res) => 
 	{
-		// retrieve the blog-related details stored in the database 
+		// Retrieve the blog-related details stored in the database 
 		const blogDetailsQuery = "SELECT * FROM blog_settings_db";
 		let detailRows = await queryDatabase(blogDetailsQuery);
 		
 		let id = req.params.id; // Get the required id 
 		
-		// retrieve any draft that matches that selected id 
+		// Retrieve any draft that matches that selected id 
 		let draftIdQuery = `SELECT * FROM drafts_db WHERE draft_id=${id}`; 
 		let draftRows = await queryDatabase(draftIdQuery);
 		
-		// render the author's edit draft article page with the blog details as well 
+		// Render the author's edit draft article page with the blog details as well 
 		// as the data retrieved from the query 
 		res.render("edit-draft.ejs", { details: detailRows, drafts: draftRows });
 	}))	
@@ -80,36 +86,36 @@ module.exports = function (app)
 	/**
 	* PURPOSE:
 	* The following get route retrieves:  
-	* a) title, subtile and author of the blog 
-	* b) an article retrieved by its id  
+	* a) The title, subtile and author of the blog 
+	* b) An article retrieved by its id  
 	* INPUTS:
-	* the router url, the request and the response
+	* The router url, the request and the response
 	* OUTPUTS:
-	* A rendered page that displays an article  
+	* A rendered page that displays an article based on its id
 	**/
 	app.get("/edit/:id", runAsyncWrapper(async(req, res) => 
 	{
-		// retrieve the blog-related details stored in the database 
+		// Retrieve the blog-related details stored in the database 
 		const blogDetailsQuery = "SELECT * FROM blog_settings_db";
 		let detailRows = await queryDatabase(blogDetailsQuery);
 		
 		let id = req.params.id; // Get the required id 
 		
-		// retrieve any draft that matches that selected id 
+		// Retrieve any draft that matches that selected id 
 		let idQuery = `SELECT * FROM articles_db WHERE article_id=${id}`; 
 		let articleRows = await queryDatabase(idQuery);
 		
-		// render the author's eidt article page with the blog details as well 
+		// Render the author's edit article page with the blog details as well 
 		// as the data retrieved from the query 
 		res.render("edit.ejs", { details: detailRows, articles: articleRows });
 	}))	
 	
 	// POST ROUTES //
 	
-	// support parsing of application/json type post data
+	// Support parsing of application/json type post data
 	app.use(bodyParser.json());
 	
-	//support parsing of application/x-www-form-urlencoded post data
+	// Support parsing of application/x-www-form-urlencoded post data
 	app.use(bodyParser.urlencoded({ extended: true }));
 	
 	/**
@@ -124,7 +130,7 @@ module.exports = function (app)
 	**/
 	app.post("/create-draft-article", runAsyncWrapper(async(req, res) => 
 	{
-		// Get the params from the ejs template to populate to create a new draft
+		// Get the params from the ejs template to create a new draft
 		let articleTitle = req.body["title"];
 		let subtitle = req.body["subtitle"];
 		
@@ -150,7 +156,7 @@ module.exports = function (app)
 	/**
 	* The following post request: 
 	* a) Deletes a published article
-	* b) Reloads the page with most recently published articles
+	* b) Reloads the page with the most recently published articles
 	* INPUTS: 
 	* The router url, the request and the response
 	* OUTPUTS:
@@ -187,7 +193,7 @@ module.exports = function (app)
 		let selectQuery = `SELECT * FROM drafts_db WHERE draft_id=${id}`; 
 		let rows = await queryDatabase(selectQuery);
 		
-		// Get the params from select query rows 
+		// Get the params from the selected query rows 
 		let title = rows[0]["title"];
 		let subtitle = rows[0]["subtitle"];
 		
@@ -233,8 +239,8 @@ module.exports = function (app)
 		let blogQuery = `UPDATE blog_settings_db SET title="${title}", subtitle="${subtitle}", author="${author}"`; 
 		await queryDatabase(blogQuery);
 		
-		// Redirect to the current author's homepage   
-		res.redirect("/author-homepage");
+		// Redirect to the author's homepage   
+		res.redirect("author-homepage");
 	}))	
 	
 	/**
@@ -248,7 +254,7 @@ module.exports = function (app)
 	**/
 	app.post("/edit-draft/change-draft", runAsyncWrapper(async(req, res) => 
 	{
-		// Get the params from the ejs template to populate to update the draft
+		// Get the params from the ejs template to update the draft
 		let articleTitle = req.body["title"];
 		let subtitle = req.body["subtitle"];
 		
@@ -277,7 +283,7 @@ module.exports = function (app)
 	**/
 	app.post("/edit/change-article", runAsyncWrapper(async(req, res) => 
 	{
-		// Get the params from the ejs template to populate to update the article
+		// Get the params from the ejs template to update the article
 		let articleTitle = req.body["title"];
 		let subtitle = req.body["subtitle"];
 		

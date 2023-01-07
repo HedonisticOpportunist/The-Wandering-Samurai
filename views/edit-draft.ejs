@@ -30,61 +30,64 @@
 
 	<%# HTML BODY %>
 	<body id="edit">
-		<%# EDIT FORM %>
-		<% drafts.forEach(function(draft){ %>
-			<form action="change-draft" method="POST">
-				<p>
-					<label for="title">Title:</label> 
-				</p>
-				<p>
-					<input type="text" id="title-box" name="title" value=<%= draft.title %>> 
-				</p>
-				<p>
-					<label for="subtitle">Subtitle:</label> 
-				</p>
-				<p>
-					<input type="text" id="subtitle" name="subtitle" value=<%= draft.subtitle %>> 
-				</p>
-				<p>
-					<label for="text">Text:</label> 
-				</p>
-				<p>
-					<input type="text" id="text" name="text" value=<%= draft.text %>> 
-				</p>
-				<p>
-					<label for="date_published">Date published:</label> 
-				</p>
-				<p>
-					<input type="text" id="date_published" name="date_published" value=<%= draft.date_published%>> 
-				</p>
-				<p>
-					<label for="date_modified">Date Modified:</label> 
-				</p>
-				<p>
-					<input type="text" id="date_modified" name="date_modified" value=<%= draft.date_modified %>> 
-				</p>
-				<p>
-					<label for="number_of_likes">Number of Likes:</label> 
-				</p>
-				<p>
-					<input type="text" id="number_of_likes" name="number_of_likes" value=<%= draft.number_of_likes %>> 
-				</p>
-				<p>
-				<button class="action-btn-grad" id="submit">Save the changes 👻</button>
-				</p>
-			</form>
-		<% }) %>
+		<div class="container">
+		
+			<%# EDIT DRAFT FORM %>
+			<% drafts.forEach(function(draft){ %>
+				<form action="change-draft" method="POST">
+					<p>
+						<label for="title">Title:</label> 
+					</p>
+					<p>
+						<input type="text" id="title-box" name="title" value=<%= draft.title %> required> 
+					</p>
+					<p>
+						<label for="subtitle">Subtitle:</label> 
+					</p>
+					<p>
+						<input type="text" id="subtitle" name="subtitle" value=<%= draft.subtitle %> required> 
+					</p>
+					<p>
+						<label for="text">Text:</label> 
+					</p>
+					<p>
+						<input type="text" id="text" name="text" value=<%= draft.text %> required> 
+					</p>
+					<p>
+						<label for="date_published">Date published:</label> 
+					</p>
+					<p>
+						<input type="text" id="date_published" name="date_published" value=<%= draft.date_published%> required> 
+					</p>
+					<p>
+						<label for="date_modified">Date Modified:</label> 
+					</p>
+					<p>
+						<input type="text" id="date_modified" name="date_modified" value=<%= draft.date_modified %> required> 
+					</p>
+					<p>
+						<label for="number_of_likes">Number of Likes:</label> 
+					</p>
+					<p>
+						<input type="text" id="number_of_likes" name="number_of_likes" value=<%= draft.number_of_likes %> required> 
+					</p>
+					<p>
+					<button class="action-btn-grad" id="submit">Save the changes 👻</button>
+					</p>
+				</form>
+			<% }) %>
 	 
-	    <%# RETURN TO HOMEPAGE %>
-		<p>
-			<a href="/author-homepage"><input type=button class="navigation-btn-grad" value="Return to the author's homepage"></a>
-		</p>
+			<%# RETURN TO THE AUTHOR'S HOMEPAGE %>
+			<p>
+				<a href="/author-homepage"><input type=button class="navigation-btn-grad" value="Return to the author's homepage"></a>
+			</p>
+		</div>
 	</body>
 	
 	<%# FOOTER %>
 	<footer>
 		<div class="container">
-			<p>&copy; 2020 Ghost and Snow</p>
+			<p>&copy; 2023 Ghost and Snow 🐱</p>
 		</div>
 	</footer>
 </html>   

@@ -2,8 +2,7 @@
 module.exports = function()
 {
 	/**
-	* A function that handles queries and waits for them
-	* to be resolved 
+	* A function that handles queries and waits for them to be resolved 
 	* @Credit https://stackoverflow.com/questions/64372255/how-to-use-async-await-in-sqlite3-db-get-and-db-all
 	**/
 	this.queryDatabase = async function(query)

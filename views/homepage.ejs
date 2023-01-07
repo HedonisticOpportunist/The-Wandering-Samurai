@@ -10,6 +10,11 @@
 		<title>Reader - Home Page</title>
 	</head>
 	
+	<%# TOP NAV %>
+	<div class="topnav">
+		<a class="active" href="/author-homepage">Author's Homepage</a>
+	</div>
+	
 	 <%# HTML HEADER %>
 	<header>
 		<div class="container">
@@ -30,20 +35,22 @@
 
 	<%# HTML BODY %>
 	<body>
-		<h1> List of Published Articles </h1>
-			<ul>
-				<% articles.forEach(function(article){ %>
-					<li id="article_published"> 
-						<a href="/read/<%= article.article_id %>"><%= article.title %>, <%= article.date_published %></a>
-					</li>
-				<% }) %>
-			</ul>
+		<div class="container">
+			<h1> List of Published Articles </h1>
+				<ul>
+					<% articles.forEach(function(article){ %>
+						<li id="article_published"> 
+							<a href="/read/<%= article.article_id %>"><%= article.title %>, <%= article.date_published %></a>
+						</li>
+					<% }) %>
+				</ul>
+			</div>
 	</body>
 	
 	<%# FOOTER %>
 	<footer>
 		<div class="container">
-			<p>&copy; 2020 Ghost and Snow</p>
+			<p>&copy; 2023 Ghost and Snow 🐱</p>
 		</div>
 	</footer>
 </html>   

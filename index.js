@@ -4,7 +4,7 @@ const port = 3000;
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
-// items in the global namespace are accessible throught out the node application
+// Items in the global namespace are accessible throughout the node application
 global.db = new sqlite3.Database('./database.db',function(err)
 {
 	if(err)
@@ -19,21 +19,21 @@ global.db = new sqlite3.Database('./database.db',function(err)
 	}
 });
 
-// routes
+// Routes
 require("./routes/author")(app);
 require("./routes/reader")(app);
 
-// the views folder 
+// The views folder 
 app.set("views", __dirname + "/views");
 
-// set the app to use ejs for rendering
+// Set the app to use ejs for rendering
 app.set("view engine", "ejs");
 app.engine("html", require("ejs").renderFile);
 
-// enables the app to use the public directory 
+// Enables the app to use the public directory 
 app.use(express.static("public"));
 
-// used for testing purposes 
+// Used for testing purposes 
 app.listen(port, () =>
 {
 	console.log(`Example app listening on port ${port}`)

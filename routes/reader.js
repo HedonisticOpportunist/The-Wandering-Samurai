@@ -10,7 +10,7 @@ module.exports = function(app)
 	/**
 	* PURPOSE:
 	* The following get route retrieves:  
-	* a) Title, subtile and author of the blog 
+	* a) The title, subtile and author of the blog 
 	* b) The currently published articles ordered by their publication date 
 	* INPUTS:
 	* The router url, the request and the response
@@ -19,15 +19,15 @@ module.exports = function(app)
 	**/
 	app.get('/', runAsyncWrapper(async(req, res) => 
 	{
-		// retrieve the blog-related details stored in the database 
+		// Retrieve the blog-related details stored in the database 
 		const blogDetailsQuery = "SELECT * FROM blog_settings_db";
 		let detailRows = await queryDatabase(blogDetailsQuery);
 		
-		// retrieve the currently published articles stored in the database 
+		// Retrieve the currently published articles stored in the database 
 		const articleQuery = "SELECT * FROM articles_db ORDER BY date_published DESC";
 		let articleRows = await queryDatabase(articleQuery);
 		
-		// render the reader home page with tbe blog details and articles 
+		// Render the reader home page with the blog details and articles 
 		res.render("homepage.ejs", { details: detailRows, articles : articleRows });
 	}))
 	
@@ -39,50 +39,50 @@ module.exports = function(app)
 	* INPUTS: 
 	* The router url, the request and the response 
 	* OUTPUTS:
-	* A rendered page that displays a single article 
+	* A rendered page that displays a single article with user comments
 	**/
 	app.get("/read/:id", runAsyncWrapper(async(req, res) => 
 	{
-		// retrieve the blog-related details stored in the database 
+		// Retrieve the blog-related details stored in the database 
 		const blogDetailsQuery = "SELECT * FROM blog_settings_db";
 		let detailRows = await queryDatabase(blogDetailsQuery);
 		
 		let articleId = req.params.id; // Get the required id 
 		
-		// retrieve any article that matches that selected id 
+		// Retrieve any article that matches that selected id 
 		let idQuery = `SELECT * FROM articles_db WHERE article_id=${articleId}`; 
 		let selectedRows = await queryDatabase(idQuery);
 		
-		// retrieve the previous comments stored in the database for the specific article 
+		// Retrieve any previous comments stored in the database for the specific article 
 		const commentsQuery = `SELECT * FROM comments_db WHERE comment_id=${articleId} ORDER BY date_published DESC`; 
 		let commentRows = await queryDatabase(commentsQuery);
 		
-		// render the reader's article page with the blog details, the previous reader comments 
+		// Render the reader's article page with the blog details, the previous reader comments 
 		// as well as the article data retrieved from the query 
 		res.render("read.ejs", { details: detailRows, articles: selectedRows, comments : commentRows });
 	}))	
 	
 	// POST ROUTES //
 	
-	// support parsing of application/json type post data
+	// Support parsing of application/json type post data
 	app.use(bodyParser.json());
 	
-	//support parsing of application/x-www-form-urlencoded post data
+	// Support parsing of application/x-www-form-urlencoded post data
 	app.use(bodyParser.urlencoded({ extended: true }));
 	
 	/**
 	PURPOSE:
 	* The following post request: 
 	* a) Adds a comment 
-	* b) Reloads the page with most reent comment 
+	* b) Reloads the page with the most recent comment displayed
 	* INPUTS: 
 	* The router url, the request and the response
 	* OUTPUTS:
-	* A reloaded page that displays the article with a new comment  
+	* A reloaded page that displays the article with its most recent comment  
 	**/
 	app.post("/read/comments", runAsyncWrapper(async(req, res) => 
 	{
-		// Get the params from the ejs template to populate the comment table 
+		// Get the params from the ejs template to populate the comments table 
 		let id = Number(req.body["article_id"]);
 		let comment = req.body["textComment"];
 		
@@ -106,7 +106,7 @@ module.exports = function(app)
 	* INPUTS: 
 	* The router url, the request and the response
 	* OUTPUTS:
-	* A reloaded page that displays the article with updated likes 
+	* A reloaded page that displays the article with its updated likes 
 	**/
 	app.post("/read/number_of_likes", runAsyncWrapper(async(req, res) => 
 	{
@@ -119,7 +119,7 @@ module.exports = function(app)
 		
 		// Get the actual integer value from the rows returned by the query 
 		let count = rows[0]['number_of_likes'];
-		let updatedCount = count + 1; // incrememnt the current number of likes by one 
+		let updatedCount = count + 1; // Increment the current number of likes by one 
 		
 		// Update the articles table for that specific article in regards to its number of likes 
 		let postQuery = `UPDATE articles_db SET number_of_likes = ${updatedCount} WHERE article_id=${id}`; 

@@ -10,6 +10,11 @@
 		<title>Author - Home Page:</title>
 	</head>
 	
+	<%# TOP NAV %>
+	<div class="topnav">
+		<a class="active" href="/">Reader's Homepage</a>
+	</div>
+	
 	 <%# HTML HEADER %>
 	<header>
 		<div class="container">
@@ -27,60 +32,65 @@
 			<% }) %>
 		</div>
 	</header>
-
+	
 	<%# HTML BODY %>
 	<body id="author">
-		<p>
-			<h2>Author's Homepage</h2>
-		</p>
-		<p>
-			<a href="settings"><input type=button class="navigation-btn-grad" value="Go to the settings page"></a>
-		</p>
-		<p>
-			<%# UPDATE %>
-			<h3> Create a Draft Article </h3>
-			<form action="create-draft-article" method="post">
-				<p>
-					<label for="title">Title:</label> 
+		<div class="container">
+			<p>
+				<h2>Author's Homepage</h2>
+			</p>
+			<p>
+				<a href="settings"><input type=button class="navigation-btn-grad" value="Go to the settings page"></a>
+			</p>
+			<p>
+				<%# CREATE A NEW DRAFT %>
+				<h3> Create a Draft Article </h3>
+				<p> 
+					Create a new draft article. 
 				</p>
-				<p>
-					<input type="text" id="title-box" name="title" value='Lost'> 
-				</p>
-				<p>
-					<label for="subtitle">Subtitle:</label> 
-				</p>
-				<p>
-					<input type="text" id="subtitle" name="subtitle" value='Help'> 
-				</p>
-				<p>
-					<label for="text">Text:</label> 
-				</p>
-				<p>
-					<input type="text" id="text" name="text" value='Where am I?'> 
-				</p>
-				<p>
-					<label for="date_published">Date published:</label> 
-				</p>
-				<p>
-					<input type="text" id="date_published" name="date_published" value='03/09/3001'> 
-				</p>
-				<p>
-					<label for="date_modified">Date Modified:</label> 
-				</p>
-				<p>
-					<input type="text" id="date_modified" name="date_modified" value='03/09/3001'> 
-				</p>
-				<p>
-					<label for="number_of_likes">Number of Likes:</label> 
-				</p>
-				<p>
-					<input type="text" id="number_of_likes" name="number_of_likes" value="0"> 
-				</p>
-				<p>
-					<button class="action-btn-grad" id="submit">Create a new draft 👻</button>
-				</p>
-			</form>
-		</p>
+				<form action="create-draft-article" method="post">
+					<p>
+						<label for="title">Title:</label> 
+					</p>
+					<p>
+						<input type="text" id="title-box" name="title" value='Lost'> 
+					</p>
+					<p>
+						<label for="subtitle">Subtitle:</label> 
+					</p>
+					<p>
+						<input type="text" id="subtitle" name="subtitle" value='Help'> 
+					</p>
+					<p>
+						<label for="text">Text:</label> 
+					</p>
+					<p>
+						<input type="text" id="text" name="text" value='Where am I?'> 
+					</p>
+					<p>
+						<label for="date_published">Date published:</label> 
+					</p>
+					<p>
+						<input type="text" id="date_published" name="date_published" value='03/09/3001'> 
+					</p>
+					<p>
+						<label for="date_modified">Date Modified:</label> 
+					</p>
+					<p>
+						<input type="text" id="date_modified" name="date_modified" value='03/09/3001'> 
+					</p>
+					<p>
+						<label for="number_of_likes">Number of Likes:</label> 
+					</p>
+					<p>
+						<input type="text" id="number_of_likes" name="number_of_likes" value="0"> 
+					</p>
+					<p>
+						<button class="action-btn-grad" id="submit">Create a new draft 👻</button>
+					</p>
+				</form>
+			</p>
+		</div>
 	
 		<%# LISTS %>
 		<div class="row">
@@ -94,7 +104,7 @@
 								<li> 
 									<a href="/edit/<%= article.article_id %>"><%= article.title %>, <%= article.date_published %>, <%= article.number_of_likes %></a>
 									
-									<%# DELETE %>
+									<%# DELETE AN ARTICLE %>
 									<form action="delete-article" method="post">
 										<button class="action-btn-grad" type="submit">Delete the article 🗑️️️</button>
 										<input type="hidden" id="article_id" name="article_id" value=<%= article.article_id %>>
@@ -114,7 +124,7 @@
 						<li> 
 							<a href="/edit-draft/<%=draft.draft_id %>"><%= draft.title %>, <%= draft.date_published %>, <%= draft.date_modified %>, <%= draft.number_of_likes %></a>
 							
-							<%# PUBLSIH %>
+							<%# PUBLISH A DRAFT %>
 							<form action="publish-article" method="post">
 								<button class="action-btn-grad" type="submit">Publish the article ☺️️</button>
 								<input type="hidden" id="draft_id" name="draft_id" value=<%= draft.draft_id %>>
@@ -130,7 +140,7 @@
 	<%# FOOTER %>
 	<footer>
 		<div class="container">
-			<p>&copy; 2020 Ghost and Snow</p>
+			<p>&copy; 2023 Ghost and Snow 🐱</p>
 		</div>
 	</footer>
 </html>   

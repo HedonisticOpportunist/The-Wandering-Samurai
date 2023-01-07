@@ -11,7 +11,7 @@ body
 	height: 100%;
 	background-color: #EAFDFC;
 	font-family: "Space Grotesk", sans-serif;
-	font-size: 11px; 
+	font-size: 12px; 
 	margin: 0;
 }
 
@@ -57,6 +57,7 @@ header
 	color: #58287F;
 }
 
+/* The container is used to make the site better in terms of style */
 .container 
 {
   max-width: 800px;
@@ -117,14 +118,21 @@ header
 /* Page component styling */
 h1, h2
 {
-	font-size: 13px;
+	font-size: 14px;
 	text-transform: uppercase;
+}
+
+h3
+{
+	font-size: 13px;
 }
 	
 ul, ol
 {
 	list-style-type: ' ☯⚔️ ';
 }
+
+/* Row and column styling */
 	
 .row
 {
@@ -136,4 +144,48 @@ ul, ol
 	width: 50%;
 	float: left;
 }
-	
+
+/* form styling */
+
+input 
+{
+	width: 50%;
+}
+
+label
+{
+	font-style: italic;
+}
+
+/* 
+Top navigation styling 
+NOTE: Not created by me, but modified from:
+https://www.w3schools.com/howto/howto_js_topnav.asp
+*/
+
+.topnav 
+{
+	background-color: #579BB1;
+	overflow: hidden;
+}
+
+.topnav a 
+{
+	float: left;
+	color: #243763;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: upper;
+	font-size: 12px;
+}
+
+.topnav a:hover 
+{
+	background-color: #ddd;
+	color: #58287F;
+}
+.topnav a.active 
+{
+	background-color: #3A4F7A;
+	color: white;
+}

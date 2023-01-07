@@ -10,7 +10,10 @@
 		<title>Reader - Article Page:</title>
 	</head>
 	
-	 <%# HTML HEADER %>
+	<%# SCRIPT %>
+	<script src="/scripts/script.js" type="text/javascript"></script> 
+	
+	<%# HTML HEADER %>
 	<header>
 		<div class="container">
 			<img id="samurai_image" src="/images/samurai.png" alt="Samurai">
@@ -30,90 +33,94 @@
 	
   <%# HTML BODY %>
   <body id="read">
-	 <%# ARTICLE %>
-	<% articles.forEach(function(article){ %> 
-		<p>
-			<h1><%= article.title %> </h1>
-		</p>
-		<p>
-			<h2><%= article.subtitle %> </h2>
-		</p>
-		<p>
-			<%= article.text %> 
-		</p>
-		<p id="article_id"> 
-			Article id: <%= article.article_id %> 
-		</p>
-		<p> 
-			Date published: <%= article.date_published %> 
-		</p>
-		<p> 
-			Number of likes: <%= article.number_of_likes %>
-		</p>
-	<% }) %> 
-	
-	<%# NUMBER OF LIKES %>
-	<p>
+	<div class="container">
+		<%# DISPLAY THE ARTICLE %>
 		<% articles.forEach(function(article){ %> 
-			<form action="number_of_likes" method="post">
-				<button class="action-btn-grad" type="submit"> Like ♡ </button>
-				<input type="hidden" id="article_id" name="article_id" value=<%= article.article_id %>>
-			</form>
-		<% }) %>
-    </p>
+			<p>
+				<h1><%= article.title %> </h1>
+			</p>
+			<p>
+				<h2><%= article.subtitle %> </h2>
+			</p>
+			<p>
+				<%= article.text %> 
+			</p>
+			<p id="article_id"> 
+				Article id: <%= article.article_id %> 
+			</p>
+			<p> 
+				Date published: <%= article.date_published %> 
+			</p>
+			<p> 
+				Number of likes: <%= article.number_of_likes %>
+			</p>
+		<% }) %> 
 	
-	<%# COMMENTS %>
-    <p>
-		<h3> Post a Comment </h3>
-			<form action="comments" method="post">
-				<p>
-					<label for="comment">Comment:</label> 
-				</p>
-				<p>
-					<input type="text" id="comment-box" name="textComment" value='Comment'> 
-				</p>
-				<p>
-					<label for="lname">Name:</label> 
-				</p>
-				<p>
-					<input type="text" id="name" name="author" value='User'> 
-				</p>
-				<p>
-					<label for="date">Date Published:</label> 
-				</p>
-				<p>
-					<input type="text" id="date" name="date_published" value='10/03/2030'> 
-				</p>
-				<p>
-					<% articles.forEach(function(article){ %> 
-						<input type="hidden" id="article_id" name="article_id" value=<%= article.article_id %>> 
-					<% }) %> 
-				</p>
-				<p>
-					<button class="action-btn-grad" id="submit">Leave a comment</button>
-				</p>
-			</form>
-			<h3> Reader Comments </h3>
-			<ul>
-				<p>
-					<% comments.forEach(function(comment){ %> 
-						<li>
-							<%= comment.author %>, <%= comment.date_published %>, <%= comment.text %> 
-						</li>
-					<% }) %> 
-				</p>
-			</ul>
-			
-		<%# RETURN TO HOMEPAGE %>
+		<%# UPDATE NUMBER OF LIKES %>
 		<p>
-			<a href="/"><input type=button class="navigation-btn-grad" value="Return to the homepage"></a>
+			<% articles.forEach(function(article){ %> 
+				<form action="number_of_likes" method="post">
+					<button class="action-btn-grad" type="submit"> Like ♡ </button>
+					<input type="hidden" id="article_id" name="article_id" value=<%= article.article_id %>>
+				</form>
+			<% }) %>
 		</p>
+	
+		<%# POST A COMMENT %>
+		<p>
+			<h3> Post a Comment </h3>
+				<form action="comments" name="comments" onsubmit="return validateCommentsForm()" method="post">
+					<p>
+						<label for="comment">Comment:</label> 
+					</p>
+					<p>
+						<input type="text" id="comment-box" name="comment" value='Comment'> 
+					</p>
+					<p>
+						<label for="lname">Name:</label> 
+					</p>
+					<p>
+						<input type="text" id="name" name="author" value='User'> 
+					</p>
+					<p>
+						<label for="date">Date Published:</label> 
+					</p>
+					<p>
+						<input type="text" id="date" name="date_published" value='10/03/2030'> 
+					</p>
+					<p>
+						<% articles.forEach(function(article){ %> 
+							<input type="hidden" id="article_id" name="article_id" value=<%= article.article_id %>> 
+						<% }) %> 
+					</p>
+					<p>
+						<button class="action-btn-grad" id="submit">Leave a comment</button>
+					</p>
+				</form>
+					
+				<%# DISPLAY PREVIOUS READER COMMENTS %>
+				<h3> Reader Comments </h3>
+				<ul>
+					<p>
+						<% comments.forEach(function(comment){ %> 
+							<li>
+								<%= comment.author %>, <%= comment.date_published %>, <%= comment.text %> 
+							</li>
+						<% }) %> 
+					</p>
+				</ul>
+			
+			<%# RETURN TO THE READER'S HOMEPAGE %>
+			<p>
+				<a href="/"><input type=button class="navigation-btn-grad" value="Return to the homepage"></a>
+			</p>
+		</div>
 	</body>
 	
 	<%# FOOTER %>
 	<footer>
 		<div class="container">
-			<p>&copy; 2020 Ghost and Snow</p>
+			<p>&copy; 2023 Ghost and Snow 🐱</p>
 		</div>
 	</footer>
 </html>
