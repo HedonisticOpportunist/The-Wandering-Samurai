@@ -52,7 +52,7 @@ module.exports = function (app)
 		const blogDetailsQuery = "SELECT * FROM blog_settings_db";
 		let detailRows = await queryDatabase(blogDetailsQuery);
 		
-		// Render the reader home page with tbe blog details and articles 
+		// Render the reader home page with the blog details and articles 
 		res.render("settings.ejs", {details: detailRows});
 	}))
 	
@@ -149,7 +149,7 @@ module.exports = function (app)
 		let idRows = await queryDatabase(idQuery);
 		let id = idRows[0]["MAX(draft_id)"];
 		
-		// Reload the current article edit page   
+		// Reload to the current article edit page based on its id
 		res.redirect(`edit-draft/${id}`); 
 	}))	
 	

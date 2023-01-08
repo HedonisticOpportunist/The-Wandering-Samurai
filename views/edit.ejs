@@ -9,6 +9,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Author - Edit Article Page:</title>
 	</head>
+	
+	<%# SCRIPT %>
+	<script src="/scripts/validation-script.js" type="text/javascript"></script> 
  
 	<%# HTML HEADER %>
 	<header>
@@ -34,7 +37,7 @@
 		
 			<%# EDIT THE ARTICLE %>
 			<% articles.forEach(function(article){ %>
-				<form action="change-article" method="POST">
+				<form action="change-article" name="edit-article" onsubmit="return validateEditArticleForm()" method="post">
 					<p>
 						<label for="title">Title:</label> 
 					</p>
@@ -72,7 +75,7 @@
 						<input type="text" id="number_of_likes" name="number_of_likes" value=<%= article.number_of_likes %>> 
 					</p>
 					<p>
-					<button class="action-btn-grad" id="submit">Save the changes 👻</button>
+						<button class="action-btn-grad" id="submit">Save the changes 👻</button>
 					</p>
 				</form>
 			<% }) %>

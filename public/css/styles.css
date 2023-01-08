@@ -30,7 +30,7 @@ body
 	background-color: #F5EDCE
 }
 
-#setting body
+#settings body
 {
 	background-color: #ECE8DD
 }  
@@ -60,16 +60,15 @@ header
 /* The container is used to make the site better in terms of style */
 .container 
 {
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 25px;
+	max-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 25px;
 }
 	
 
 /* Button styling */
 /* NOTE: Not created by me */
-/* However, I have made slight modifications */
 /* attribution: https://gradientbuttons.colorion.co/ */
 .action-btn-grad 
 {
@@ -184,6 +183,7 @@ https://www.w3schools.com/howto/howto_js_topnav.asp
 	background-color: #ddd;
 	color: #58287F;
 }
+
 .topnav a.active 
 {
 	background-color: #3A4F7A;

@@ -84,7 +84,7 @@ module.exports = function(app)
 	{
 		// Get the params from the ejs template to populate the comments table 
 		let id = Number(req.body["article_id"]);
-		let comment = req.body["textComment"];
+		let comment = req.body["comment"];
 		
 		let commentAuthor = req.body["author"];
 		let commentDate = req.body["date_published"];

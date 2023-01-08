@@ -15,6 +15,9 @@
 		<a class="active" href="/">Reader's Homepage</a>
 	</div>
 	
+	<%# SCRIPT %>
+	<script src="/scripts/validation-script.js" type="text/javascript"></script> 
+	
 	 <%# HTML HEADER %>
 	<header>
 		<div class="container">
@@ -48,7 +51,7 @@
 				<p> 
 					Create a new draft article. 
 				</p>
-				<form action="create-draft-article" method="post">
+				<form action="create-draft-article" name="create-article" onsubmit="return validateCreateArticleForm()" method="post">
 					<p>
 						<label for="title">Title:</label> 
 					</p>
@@ -71,13 +74,13 @@
 						<label for="date_published">Date published:</label> 
 					</p>
 					<p>
-						<input type="text" id="date_published" name="date_published" value='03/09/3001'> 
+						<input type="text" id="date_published" name="date_published" value='03/09/2003'> 
 					</p>
 					<p>
 						<label for="date_modified">Date Modified:</label> 
 					</p>
 					<p>
-						<input type="text" id="date_modified" name="date_modified" value='03/09/3001'> 
+						<input type="text" id="date_modified" name="date_modified" value='03/09/2003'> 
 					</p>
 					<p>
 						<label for="number_of_likes">Number of Likes:</label> 
