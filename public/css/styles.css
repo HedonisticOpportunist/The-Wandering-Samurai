@@ -1,10 +1,10 @@
-/*
+/**
 * CSS STYLESHEET
-*/
+**/
 
-/* Body-related styling */
-/* Most pages have a different background colour */
-
+/** Body-related styling 
+* Most pages have a different background colour 
+**/
 body 
 {
 	margin: 0px;
@@ -35,9 +35,9 @@ body
 	background-color: #ECE8DD
 }  
 
-/* Header related-styling */
-/* The header consists of an image, a blue background and purple font */
-
+/** Header related-styling 
+* The header consists of an image, a blue background and purple font 
+**/
 #samurai_image
 {
 	border-radius: 50%;
@@ -57,7 +57,7 @@ header
 	color: #58287F;
 }
 
-/* The container is used to make the site better in terms of style */
+/** The container is used to make the site better in terms of style **/
 .container 
 {
 	max-width: 800px;
@@ -66,7 +66,6 @@ header
 	padding: 25px;
 }
 	
-
 /* Button styling */
 /* NOTE: Not created by me */
 /* attribution: https://gradientbuttons.colorion.co/ */
@@ -144,7 +143,7 @@ ul, ol
 	float: left;
 }
 
-/* form styling */
+/* Form styling */
 
 input 
 {
@@ -156,11 +155,11 @@ label
 	font-style: italic;
 }
 
-/* 
-Top navigation styling 
-NOTE: Not created by me, but modified from:
-https://www.w3schools.com/howto/howto_js_topnav.asp
-*/
+/**
+* Top navigation styling 
+* NOTE: Not created by me, but modified from:
+* https://www.w3schools.com/howto/howto_js_topnav.asp
+**/
 
 .topnav 
 {
