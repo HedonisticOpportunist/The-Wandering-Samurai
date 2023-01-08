@@ -131,8 +131,13 @@
 							<a href="/edit-draft/<%=draft.draft_id %>"><%= draft.title %>, <%= draft.date_published %>, <%= draft.date_modified %>, <%= draft.number_of_likes %></a>
 							
 							<%# PUBLISH A DRAFT %>
-							<form action="publish-article" method="post">
-								<button class="action-btn-grad" type="submit">Publish the article ☺️️</button>
+							<form action="publish-draft" method="post">
+								<button class="action-btn-grad" type="submit">Publish the draft ☺️️</button>
+								<input type="hidden" id="draft_id" name="draft_id" value=<%= draft.draft_id %>>
+							</form>
+							<%# DELETE A DRAFT %>
+							<form action="delete-draft" method="post">
+								<button class="action-btn-grad" type="submit">Delete the draft 🗑️️</button>
 								<input type="hidden" id="draft_id" name="draft_id" value=<%= draft.draft_id %>>
 							</form>
 						</li>

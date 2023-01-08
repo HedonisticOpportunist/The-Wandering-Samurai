@@ -184,7 +184,7 @@ module.exports = function (app)
 	* OUTPUTS:
 	* A reloaded page that displays the recently published articles 
 	**/
-	app.post("/publish-article", runAsyncWrapper(async(req, res) => 
+	app.post("/publish-draft", runAsyncWrapper(async(req, res) => 
 	{
 		// Get the draft id   
 		let id = Number(req.body["draft_id"]);
@@ -210,6 +210,43 @@ module.exports = function (app)
 		// Insert the draft article into the articles table
 		let insertArticleQuery = `INSERT INTO articles_db (title, subtitle, text, date_published, date_modified, number_of_likes) VALUES("${title}", "${subtitle}", "${text}", "${date_published}", "${date_modified}", ${number_of_likes});`;
 		await queryDatabase(insertArticleQuery);
+		
+		// Reload the current author's homepage   
+		res.redirect(req.get('referer'));
+	}))	
+	
+	/**
+	* The following post request: 
+	* a) Deletes an article in draft mode
+	* b) Reloads the page, no longer showing the deleted draft 
+	* INPUTS: 
+	* The router url, the request and the response
+	* OUTPUTS:
+	* A reloaded page that displays the drafts barring those that have
+	* been deleted
+	**/
+	app.post("/delete-draft", runAsyncWrapper(async(req, res) => 
+	{
+		// Get the draft id   
+		let id = Number(req.body["draft_id"]);
+		
+		// Get the draft 
+		let selectQuery = `SELECT * FROM drafts_db WHERE draft_id=${id}`; 
+		let rows = await queryDatabase(selectQuery);
+		
+		// Get the params from the selected query rows 
+		let title = rows[0]["title"];
+		let subtitle = rows[0]["subtitle"];
+		
+		let text = rows[0]["text"];
+		let date_published = rows[0]["date_published"];
+		
+		let date_modified = rows[0]["date_modified"];
+		let number_of_likes = rows[0]["number_of_likes"];
+		
+		// Delete the draft from the drafts table 
+		let publishQuery = `DELETE FROM drafts_db WHERE draft_id=${id}`; 
+		await queryDatabase(publishQuery);
 		
 		// Reload the current author's homepage   
 		res.redirect(req.get('referer'));
