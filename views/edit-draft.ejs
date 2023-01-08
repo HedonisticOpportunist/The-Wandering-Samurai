@@ -36,6 +36,8 @@
 		<div class="container">
 		
 			<%# EDIT DRAFT FORM %>
+			<h1> Edit draft </h1>
+			<p> Edit the draft and submit the changes. </p>
 			<% drafts.forEach(function(draft){ %>
 				<form action="change-draft" name="drafts" onsubmit="return validateDraftForm()" method="POST">
 					<p>

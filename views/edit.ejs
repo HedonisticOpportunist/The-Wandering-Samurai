@@ -36,6 +36,8 @@
 		<div class="container">
 		
 			<%# EDIT THE ARTICLE %>
+			<h1> Edit Article </h1>
+			<p> Edit the article and submit the changes. </p>
 			<% articles.forEach(function(article){ %>
 				<form action="change-article" name="edit-article" onsubmit="return validateEditArticleForm()" method="post">
 					<p>

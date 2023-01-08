@@ -69,6 +69,7 @@
 		<%# POST A COMMENT %>
 		<p>
 			<h3> Post a Comment </h3>
+				<p> Post a comment. </p>
 				<form action="comments" name="comments" onsubmit="return validateCommentsForm()" method="post">
 					<p>
 						<label for="comment">Comment:</label> 
@@ -100,6 +101,7 @@
 					
 				<%# DISPLAY PREVIOUS READER COMMENTS %>
 				<h3> Reader Comments </h3>
+				<p> Read previous user comments. </p>
 				<ul>
 					<p>
 						<% comments.forEach(function(comment){ %> 
